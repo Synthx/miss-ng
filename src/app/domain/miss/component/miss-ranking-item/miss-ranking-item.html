@@ -1,0 +1,24 @@
+<div class="flex items-center gap-2 rounded-xl border border-border p-3" [class]="classes()">
+    <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center">
+        <span class="font-display text-lg font-semibold text-muted-foreground">
+            @switch (index()) { @case (0) {
+            <svg app-chess-queen-icon app-icon class="h-6 w-6 text-accent" />
+            } @case (1) {
+            <svg app-icon app-medal-icon class="h-5 w-5 text-muted-foreground" />
+            } @case (2) {
+            <svg app-award-icon app-icon class="h-5 w-5 text-rose-gold" />
+            } @default { {{ index() + 1 }} } }
+        </span>
+    </div>
+    <div class="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-full">
+        <img app-miss-picture class="h-full w-full object-cover object-top" [miss]="miss()" />
+    </div>
+    <div class="min-w-0 flex-1">
+        <h3 class="truncate font-display text-lg font-semibold text-foreground">{{ miss().name }}</h3>
+        <p class="truncate text-sm text-muted-foreground">{{ miss().region }}</p>
+    </div>
+    <div class="flex-shrink-0 text-right">
+        <span class="font-display text-2xl font-bold text-primary"> {{ miss().votes }} </span>
+        <p class="text-xs text-muted-foreground">votes</p>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<header class="border-b border-border bg-card backdrop-blur-sm z-200 fixed top-0 left-0 right-0">
+    <div class="mx-auto max-w-md px-4 py-4">
+        <div class="mb-4 flex items-center justify-center gap-2">
+            <img alt="Miss France" class="h-12 w-auto object-fit" src="/images/logo.webp" />
+        </div>
+        <div class="flex rounded-xl bg-muted p-1">
+            @for (tab of tabs(); track tab.key) {
+            <button
+                class="flex flex-1 items-center justify-center gap-2 rounded-lg py-2.5 text-sm font-medium transition-all"
+                type="button"
+                [class]="tab.active ? 'bg-card text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'"
+                [disabled]="tab.active"
+                (click)="selectTab(tab.key)"
+            >
+                @switch (tab.key) { @case ('vote') {
+                <svg app-crown-icon app-icon class="h-4 w-4" />
+                <span>Voter</span>
+                } @case ('ranking') {
+                <svg app-icon app-trophy-icon class="h-4 w-4" />
+                <span>Classement</span>
+                } }
+            </button>
+            }
+        </div>
+    </div>
+</header>

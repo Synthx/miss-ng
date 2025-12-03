@@ -1,0 +1,5 @@
+@import 'tailwindcss' prefix(tw);
+
+.register {
+    @apply tw:flex tw:min-h-screen tw:flex-col tw:items-center tw:justify-center tw:px-4;
+}

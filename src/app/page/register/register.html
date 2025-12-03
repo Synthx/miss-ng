@@ -1,0 +1,37 @@
+<div class="flex min-h-screen flex-col items-center justify-center bg-background px-4">
+    <div class="w-full max-w-sm text-center">
+        <div class="flex flex-col items-center gap-2">
+            <img alt="Miss France" class="h-30 w-auto object-fit" src="/images/logo.webp" />
+            <p class="text-muted-foreground text-center">Votez pour votre candidate préférée</p>
+        </div>
+        <form class="mt-8 space-y-4" (ngSubmit)="register()">
+            <div class="flex flex-col align-stretch space-y-2">
+                <label class="block text-left text-sm font-medium text-foreground" for="pseudo">
+                    Choisissez votre pseudonyme <span class="text-destructive">*</span>
+                </label>
+                <input
+                    autocomplete="off"
+                    class="flex w-full border px-3 py-2 ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm h-12 rounded-xl border-border bg-card text-center text-lg placeholder:text-muted-foreground/50"
+                    id="pseudo"
+                    placeholder="Entrez votre pseudo..."
+                    type="text"
+                    [field]="registerForm.pseudo"
+                />
+                @if (registerForm.pseudo().errors().length > 0 && registerForm.pseudo().touched()) {
+                <div class="flex flex-col items-start">
+                    @for (error of registerForm.pseudo().errors(); track error) {
+                    <span class="text-left text-xs text-destructive">{{ error.message }}</span>
+                    }
+                </div>
+                }
+            </div>
+            <button
+                class="h-12 w-full rounded-xl bg-gradient-to-r from-primary to-accent font-semibold text-primary-foreground shadow-elegant transition-all hover:shadow-glow disabled:opacity-50"
+                type="submit"
+                [disabled]="registerForm.pseudo().invalid()"
+            >
+                Commencer à voter
+            </button>
+        </form>
+    </div>
+</div>

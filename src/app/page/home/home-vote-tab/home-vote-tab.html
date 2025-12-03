@@ -1,0 +1,45 @@
+<div class="flex flex-1 flex-col items-center px-4 py-6">
+    <div class="mb-6 w-full max-w-sm">
+        <div class="mb-2 flex items-center justify-between text-sm">
+            <span class="text-muted-foreground">Progression</span>
+            <span class="font-medium text-foreground"> {{ current() }} / {{ total() }} </span>
+        </div>
+        <div class="h-2 overflow-hidden rounded-full bg-muted">
+            <div class="h-full bg-primary rounded-full" [style.width.%]="progression()"></div>
+        </div>
+    </div>
+    <div class="relative flex h-[520px] w-full max-w-sm items-center justify-center">
+        @for (miss of remainingMisses(); track miss.id) {
+        <app-miss-vote-card [miss]="miss" [style.z-index]="$index" />
+        } @empty {
+        <p>empty</p>
+        } @if (loading()) {
+        <div class="absolute inset-0 z-100 bg-card/50 rounded-xl flex items-center justify-center">
+            <app-spinner />
+        </div>
+        }
+    </div>
+    @if (currentMissId(); as id) {
+    <div class="flex items-center justify-center gap-4 -mt-4 z-100">
+        <button
+            aria-label="Passer"
+            class="flex h-16 w-16 items-center justify-center rounded-full border-4 border-destructive bg-card text-destructive shadow-button transition-all hover:bg-destructive hover:text-destructive-foreground"
+            type="button"
+            [disabled]="loading()"
+            (click)="vote(id, false)"
+        >
+            <svg app-icon app-x-icon class="h-8 w-8" />
+        </button>
+        <button
+            aria-label="Voter"
+            class="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-r from-gold to-gold-light text-primary-foreground shadow-button transition-all hover:shadow-glow"
+            type="button"
+            [disabled]="loading()"
+            (click)="vote(id, true)"
+        >
+            <svg app-heart-icon app-icon class="h-8 w-8" />
+        </button>
+    </div>
+    }
+    <p class="mt-6 text-sm text-muted-foreground">Smash or pass ?</p>
+</div>

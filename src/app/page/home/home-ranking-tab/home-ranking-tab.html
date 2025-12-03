@@ -1,0 +1,14 @@
+<div class="flex-1 px-4 py-6 overflow-y-auto">
+    <div class="mx-auto max-w-md">
+        <div class="mb-6 flex items-center justify-center gap-2">
+            <svg app-icon app-sparkles-icon class="h-5 w-5 text-accent" />
+            <h2 class="font-display text-2xl font-semibold text-foreground">Classement</h2>
+            <svg app-icon app-sparkles-icon class="h-5 w-5 text-accent" />
+        </div>
+        <div class="flex flex-col gap-3">
+            @for (miss of misses(); track miss.id) {
+            <app-miss-ranking-item [index]="$index" [miss]="miss" />
+            }
+        </div>
+    </div>
+</div>

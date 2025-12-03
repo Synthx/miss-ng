@@ -1,0 +1,13 @@
+<div class="absolute inset-0 h-full w-full max-w-sm cursor-grab active:cursor-grabbing rounded-2xl bg-card shadow-card">
+    <div class="h-full relative overflow-hidden rounded-xl">
+        <img app-miss-picture class="h-full w-full object-cover object-top" [miss]="miss()" />
+        <div class="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-6 text-primary-foreground">
+            <h2 class="font-display text-3xl font-semibold">{{ miss().name }}, {{ miss().age }}</h2>
+            <div class="mt-2 flex items-center gap-2 text-primary-foreground/80">
+                <svg app-icon app-map-pin-icon class="h-4 w-4" />
+                <span class="text-sm font-medium">{{ miss().region }}</span>
+            </div>
+        </div>
+    </div>
+</div>

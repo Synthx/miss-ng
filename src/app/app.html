@@ -1,0 +1,10 @@
+@if (loading()) {
+<div class="absolute z-50 inset-0 bg-background p-8 flex flex-col items-center justify-center gap-4">
+    <img alt="Miss France" class="h-30 w-auto object-fit" src="/images/logo.webp" />
+    <p class="text-center">Chargement des données...</p>
+</div>
+} @if (logged()) {
+<router-outlet />
+} @else {
+<app-register />
+}

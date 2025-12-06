@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
-import { arrayUnion, collection, doc, Firestore, getDoc, increment, setDoc, updateDoc } from '@angular/fire/firestore';
-import { from, map, Observable, switchMap } from 'rxjs';
+import { arrayUnion, collection, doc, Firestore, getDoc, increment, updateDoc } from '@angular/fire/firestore';
+import { from, map, Observable } from 'rxjs';
 import { Miss } from '../type/miss';
 
 @Injectable({
@@ -32,27 +32,11 @@ export class MissService {
     }
 
     vote(id: Miss['id'], votedBy: string): Observable<void> {
-        return from(getDoc(this.#rankingReference)).pipe(
-            switchMap((snapshot) => {
-                if (snapshot.exists()) {
-                    return from(
-                        updateDoc(this.#rankingReference, {
-                            [`${id}.votes`]: increment(1),
-                            [`${id}.votedBy`]: arrayUnion(votedBy),
-                        }),
-                    );
-                }
-
-                return from(
-                    setDoc(this.#rankingReference, {
-                        [id]: {
-                            votes: 1,
-                            votedBy: [votedBy],
-                        },
-                    }),
-                );
+        return from(
+            updateDoc(this.#rankingReference, {
+                [`${id}.votes`]: increment(1),
+                [`${id}.votedBy`]: arrayUnion(votedBy),
             }),
-            map(() => void 0),
-        );
+        ).pipe(map(() => void 0));
     }
 }

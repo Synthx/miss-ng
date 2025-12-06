@@ -17,6 +17,7 @@ export default class Register {
         pseudo: '',
     });
 
+    protected readonly loading = this.#authStore.loading;
     protected readonly registerForm = form(this.#registerFormModel, (path) => {
         required(path.pseudo, { message: 'Le pseudo est requis' });
         maxLength(path.pseudo, 30, { message: '' });
